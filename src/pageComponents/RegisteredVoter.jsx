@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
-import * as jwtDecode from 'jwt-decode';
+import  {jwtDecode} from 'jwt-decode';
 
 const RegisteredVoter = () => {
   const [voters, setVoters] = useState([]);
@@ -14,9 +14,11 @@ const RegisteredVoter = () => {
   useEffect(() => {
     const fetchAdminData = async () => {
       const token = localStorage.getItem('jwtToken');
+      // console.log(token)
       
       if (!token) {
         navigate('/login');
+        // console.log("token not found")
         return;
       }
 

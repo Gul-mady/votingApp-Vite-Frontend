@@ -5,7 +5,6 @@ import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
 import Dashboard from './pages/DashboardPage';
 import ProfilePage from './pages/ProfilePage';
-import PrivateRoute from './pages/PrivateRoute'; // Updated PrivateRoute
 import HomePage from './pages/HomePage';
 import CandidatePage from './pages/CandidatePage';
 import Layout from './assets/Layout';
@@ -32,10 +31,7 @@ function App() {
           <Route path="/register" element={<SignupPage />} />
           <Route path="/editUser" element={<EditUser />} />
           
-          <Route 
-            path="/profile" 
-            element={<PrivateRoute element={<ProfilePage />} requiredRole="user" />} 
-          />
+          <Route path="/profile" element={<ProfilePage />} />
            <Route path="/dashboard" element={<Dashboard />} />
            <Route path="/403" element={<ForbiddenPage />} />
            <Route path="/registered-parties" element={<RegisteredPartiesPage />} />

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import * as jwtDecode from 'jwt-decode';
+import  {jwtDecode} from 'jwt-decode';
 import { useNavigate } from 'react-router-dom';
 
 const EditUser = () => {

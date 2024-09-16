@@ -82,7 +82,7 @@ const HomePage = () => {
 
       {/* Main Banner Section */}
       <main className="flex flex-col md:flex-row items-center justify-between px-8 py-16">
-        <img src="" alt="Let's Vote" className="w-full md:w-1/2 mb-8 md:mb-0 transition-transform transform hover:scale-105 duration-500" />
+        <img src="https://southwest.unison.org.uk/content/uploads/sites/4/2024/04/Vote-web-graphic-745-x-420-px.png" alt="Let's Vote" className="w-full md:w-1/2 mb-8 md:mb-0 transition-transform transform hover:scale-105 duration-500" />
         <div className="text-center md:text-left">
           <h2 className="text-4xl md:text-6xl font-bold text-[#73659e] hover:text-[#6e5b7d] transition-colors duration-300">Be a part of decision</h2>
           <p className="text-3xl md:text-4xl font-semibold mt-4">Vote Today</p>

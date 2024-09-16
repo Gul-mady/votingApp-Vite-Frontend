@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import * as jwtDecode from 'jwt-decode';
+import  {jwtDecode} from 'jwt-decode';
 
 const ElectionResultsPage = () => {
   const [isAdmin, setIsAdmin] = useState(false);

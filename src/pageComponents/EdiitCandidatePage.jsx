@@ -83,8 +83,10 @@ const EditCandidatePage = () => {
     }
   };
 
-  if (loading) return <p className="text-[#eeeeee] text-center">Loading...</p>;
-  if (error) return <p className="text-red-500 text-center">{error}</p>;
+  if (loading) return <div className="min-h-screen flex items-center justify-center bg-[#151515] text-[#eeeeee]">
+  Loading...
+</div>;
+  if (error) return <p className="min-h-screen flex items-center justify-center bg-[#151515] text-[#eeeeee]">{error}</p>;
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-[#151515] text-[#eeeeee]">

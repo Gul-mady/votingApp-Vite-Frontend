@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import * as jwtDecode from 'jwt-decode';
+import {jwtDecode} from 'jwt-decode'; // Import jwt-decode
 
 const QualifiedCandidatesPage = () => {
   const [candidates, setCandidates] = useState([]);
@@ -14,15 +14,23 @@ const QualifiedCandidatesPage = () => {
   useEffect(() => {
     const fetchAdminData = async () => {
       const token = localStorage.getItem('jwtToken');
-      
+
       if (!token) {
         navigate('/login');
         return;
       }
 
       try {
-        // Decode the token to get user info
+        // Decode the token to get user info and check expiration
         const decodedToken = jwtDecode(token);
+
+        // Check if the token is expired
+        if (decodedToken.exp * 1000 < Date.now()) {
+          localStorage.removeItem('jwtToken');
+          navigate('/login');
+          return;
+        }
+
         const userId = decodedToken.id;
 
         if (!userId) {
@@ -57,6 +65,7 @@ const QualifiedCandidatesPage = () => {
       } catch (error) {
         console.error('Error verifying token or role', error);
         setError('Verification failed. Please login again.');
+        localStorage.removeItem('jwtToken');
         navigate('/login');
       } finally {
         setLoading(false);

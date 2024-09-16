@@ -85,7 +85,7 @@ const CandidatePage = () => {
 
       // Re-fetch vote counts
       await fetchVoteCounts();
-      
+
       alert('Vote recorded successfully');
     } catch (error) {
       if (error.response) {

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate, useLocation } from 'react-router-dom';
-import * as jwtDecode from 'jwt-decode';
+import {jwtDecode} from 'jwt-decode'; // Correct import for jwt-decode
 
 const ProfilePage = () => {
   const [profileData, setProfileData] = useState(null);
@@ -15,12 +15,14 @@ const ProfilePage = () => {
       const currentTime = Date.now() / 1000;
       return decodedToken.exp < currentTime;
     } catch (error) {
+      console.error('Token decoding failed:', error);
       return true;
     }
   };
 
   useEffect(() => {
     const token = localStorage.getItem('jwtToken');
+
     if (!token || isTokenExpired(token)) {
       localStorage.removeItem('jwtToken');
       navigate('/login');
@@ -38,8 +40,10 @@ const ProfilePage = () => {
         });
         setProfileData(response.data);
       } catch (error) {
-        console.error('Failed to fetch user data', error.response || error.message);
+        console.error('Failed to fetch user data:', error.response || error.message);
         alert('Failed to load profile data');
+        localStorage.removeItem('jwtToken'); // Clear token if fetching fails
+        navigate('/login'); // Redirect to login if fetching profile fails
       }
     };
 
@@ -51,9 +55,11 @@ const ProfilePage = () => {
   };
 
   if (!profileData) {
-    return <div className="min-h-screen flex items-center justify-center bg-[#151515] text-[#eeeeee]">
-    Loading...
-  </div>
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-[#151515] text-[#eeeeee]">
+        Loading...
+      </div>
+    );
   }
 
   return (

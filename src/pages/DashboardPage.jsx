@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import * as jwtDecode from 'jwt-decode';
+import { jwtDecode } from 'jwt-decode';
 
 const Dashboard = () => {
   const [isAdmin, setIsAdmin] = useState(false);
@@ -26,7 +26,7 @@ const Dashboard = () => {
         }
 
         // Verify user role
-        const response = await fetch(`https://voting-app-x15.vercel.app/user/profile/${userId}`, {
+        const response = await fetch(`https://voting-app-x15.vercel.app/profile/${userId}`, {
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${token}`
@@ -106,7 +106,7 @@ const Dashboard = () => {
       {/* Main Content */}
       <div className="w-full md:w-3/4 bg-[#eeeeee] p-8">
         <h1 className="text-4xl mb-6 text-[#151515]">Dashboard</h1>
-        
+
         <div className="bg-[#73659e] p-6 rounded-lg shadow-lg transition-transform transform hover:scale-105 duration-500">
           <h2 className="text-[#eeeeee] text-2xl mb-4">Election Data Centre</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
