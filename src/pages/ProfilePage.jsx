@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import { useNavigate, useLocation } from 'react-router-dom';
 import {jwtDecode} from 'jwt-decode'; // Correct import for jwt-decode
 
 const ProfilePage = () => {
   const [profileData, setProfileData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [profilePictureUrl, setProfilePictureUrl] = useState(null);
   const navigate = useNavigate();
   const location = useLocation(); // Hook to detect location changes
 
@@ -21,40 +23,70 @@ const ProfilePage = () => {
   };
 
   useEffect(() => {
-    const token = localStorage.getItem('jwtToken');
-
-    if (!token || isTokenExpired(token)) {
-      localStorage.removeItem('jwtToken');
-      navigate('/login');
-      return;
-    }
-
     const fetchProfileData = async () => {
+      const token = localStorage.getItem('jwtToken');
+
+      if (!token || isTokenExpired(token)) {
+        localStorage.removeItem('jwtToken');
+        navigate('/login');
+        return;
+      }
+
       try {
+        // Decode the token to get user info
         const decodedToken = jwtDecode(token);
-        const response = await axios.get(`http://localhost:4000/user/profile/${decodedToken.id}`, {
+        const userId = decodedToken.id;
+
+        if (!userId) {
+          throw new Error('User ID is undefined');
+        }
+
+        // Fetch the profile data
+        const response = await fetch(`https://voting-app-x15.vercel.app/user/profile/${userId}`, {
+          method: 'GET',
           headers: {
-            'x-access-token': token,
-          },
-          withCredentials: true,
+            'Authorization': `Bearer ${token}`
+          }
         });
-        setProfileData(response.data);
+
+        if (!response.ok) {
+          throw new Error('Failed to fetch profile data');
+        }
+
+        const profileData = await response.json();
+        setProfileData(profileData);
+
+        // Fetch the profile picture as a blob
+        if (profileData.profilePicture) {
+          const pictureResponse = await fetch(`https://voting-app-x15.vercel.app/uploads/${profileData.profilePicture}`, {
+            method: 'GET',
+            headers: {
+              'Authorization': `Bearer ${token}`
+            }
+          });
+
+          if (!pictureResponse.ok) {
+            throw new Error('Failed to fetch profile picture');
+          }
+
+          const pictureBlob = await pictureResponse.blob();
+          const pictureUrl = URL.createObjectURL(pictureBlob);
+          setProfilePictureUrl(pictureUrl);
+        }
       } catch (error) {
-        console.error('Failed to fetch user data:', error.response || error.message);
-        alert('Failed to load profile data');
+        console.error('Failed to fetch profile data:', error);
+        setError('Failed to load profile data');
         localStorage.removeItem('jwtToken'); // Clear token if fetching fails
         navigate('/login'); // Redirect to login if fetching profile fails
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchProfileData();
-  }, [navigate, location]); // Re-fetch data on location change
+  }, [navigate, location]);
 
-  const handleEditProfile = () => {
-    navigate('/editUser');
-  };
-
-  if (!profileData) {
+  if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-[#151515] text-[#eeeeee]">
         Loading...
@@ -62,13 +94,29 @@ const ProfilePage = () => {
     );
   }
 
+  if (error) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-[#151515] text-[#eeeeee]">
+        <p>{error}</p>
+      </div>
+    );
+  }
+
+  if (!profileData) {
+    return null;
+  }
+
+  const handleEditProfile = () => {
+    navigate('/editUser');
+  };
+
   return (
     <div className="min-h-screen bg-[#151515] flex flex-col items-center justify-center py-8 px-4">
       <div className="max-w-lg w-full bg-[#1e1e1e] p-6 rounded-lg shadow-lg">
         {/* Profile Picture Section */}
         <div className="flex flex-col items-center mb-6">
           <img
-            src={profileData.profilePicture ? `https://voting-app-x15.vercel.app/uploads/${profileData.profilePicture}` : 'https://via.placeholder.com/150'}
+            src={profilePictureUrl || 'https://via.placeholder.com/150'}
             alt="Profile"
             className="rounded-full w-32 h-32 object-cover border-4 border-[#73659e] transition-transform transform hover:scale-110 duration-500"
           />
