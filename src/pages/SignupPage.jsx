@@ -55,7 +55,7 @@ const SignUpPage = () => {
             className="w-full h-full object-cover"
           />
         </div>
-        
+
         {/* Form Section */}
         <div className="w-full md:w-1/2 flex flex-col justify-center items-center p-6 bg-[#1e1e1e]">
           <form onSubmit={handleSignUp} className="w-full max-w-md space-y-4 bg-[#2e2e2e] p-4 rounded-lg shadow-lg">
@@ -160,9 +160,9 @@ const SignUpPage = () => {
               </div>
             </div>
 
-            <Button 
-              text="Sign Up" 
-              className="w-full py-2 bg-[#73659e] text-[#ffffff] font-bold rounded-lg transition duration-300 hover:bg-[#a91d3a] shadow-lg hover:shadow-xl mt-4" 
+            <Button
+              text="Sign Up"
+              className="w-full py-2 bg-[#73659e] text-[#ffffff] font-bold rounded-lg transition duration-300 hover:bg-[#a91d3a] shadow-lg hover:shadow-xl mt-4"
             />
           </form>
           <div className="mt-4 text-center">
