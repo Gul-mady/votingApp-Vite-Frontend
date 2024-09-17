@@ -27,7 +27,7 @@ const SignUpPage = () => {
     formData.append('identityCardNumber', identityCardNumber);
     formData.append('role', role); // Append role to FormData
     if (file) {
-      formData.append('file', file);
+      formData.append('profilePicture', file);
     }
 
     try {
