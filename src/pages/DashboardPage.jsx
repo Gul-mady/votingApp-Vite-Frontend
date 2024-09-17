@@ -84,7 +84,7 @@ const Dashboard = () => {
           <h2 className="text-xl font-semibold">{adminData.name || 'Admin Name'}</h2>
         </div>
         <ul className="space-y-4">
-          {[ 
+          {[
             { to: '/dashboard', text: 'Dashboard' },
             { to: '/registered-parties', text: 'Registered Parties' },
             { to: '/candidates', text: 'Candidates' },
@@ -110,7 +110,7 @@ const Dashboard = () => {
         <div className="bg-[#73659e] p-6 rounded-lg shadow-lg transition-transform transform hover:scale-105 duration-500">
           <h2 className="text-[#eeeeee] text-2xl mb-4">Election Data Centre</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {[ 
+            {[
               { to: '/election-details', title: 'Election Details:', color: '#a91d3a' },
               { to: '/qualified-candidates', title: 'Qualified Candidates:', color: '#a91d3a' },
               { to: '/registered-voters', title: 'Registered Voters:', color: '#73659e' },
