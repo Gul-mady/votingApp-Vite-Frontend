@@ -26,7 +26,7 @@ const Dashboard = () => {
         }
 
         // Verify user role
-        const response = await fetch(`http://localhost:4000/user/profile/${userId}`, {
+        const response = await fetch(`https://voting-app-x15.vercel.app/profile/${userId}`, {
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${token}`

@@ -26,7 +26,7 @@ const ElectionResultsPage = () => {
         }
 
         // Verify the token by fetching the user profile
-        const profileResponse = await fetch(`http://localhost:4000/user/profile/${userId}`, {
+        const profileResponse = await fetch(`https://voting-app-x15.vercel.app/user/profile/${userId}`, {
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${token}`

@@ -31,7 +31,7 @@ const SignUpPage = () => {
     }
 
     try {
-       await axios.post('http://localhost:4000/user/signup', formData, {
+       await axios.post('https://voting-app-x15.vercel.app/user/signup', formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }

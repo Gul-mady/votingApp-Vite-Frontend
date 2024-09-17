@@ -42,7 +42,7 @@ const EditUser = () => {
 
             try {
                 const token = localStorage.getItem('jwtToken');
-                const response = await axios.get(`http://localhost:4000/user/profile/${userId}`, {
+                const response = await axios.get(`https://voting-app-x15.vercel.app/user/profile/${userId}`, {
                     headers: {
                         'x-access-token': token
                     }
@@ -84,7 +84,7 @@ const EditUser = () => {
                 address,
             };
     
-            const response = await axios.put(`http://localhost:4000/user/${userId}`, data, {
+            const response = await axios.put(`https://voting-app-x15.vercel.app/user/${userId}`, data, {
                 headers: {
                     'x-access-token': token,
                     'Content-Type': 'application/json'

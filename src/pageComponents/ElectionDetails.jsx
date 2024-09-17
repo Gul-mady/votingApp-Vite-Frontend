@@ -31,7 +31,7 @@ const ElectionDetailsPage = () => {
         }
 
         // Verify the token by fetching the user profile
-        const profileResponse = await fetch(`http://localhost:4000/user/profile/${userId}`, {
+        const profileResponse = await fetch(`https://voting-app-x15.vercel.app/user/profile/${userId}`, {
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${token}`
@@ -67,7 +67,7 @@ const ElectionDetailsPage = () => {
     const fetchData = async (token) => {
       try {
         // Fetch parties
-        const partiesResponse = await axios.get('http://localhost:4000/candidate/getCandidates', {
+        const partiesResponse = await axios.get('https://voting-app-x15.vercel.app/candidate/getCandidates', {
           headers: {
             'x-access-token': token
           }
@@ -75,7 +75,7 @@ const ElectionDetailsPage = () => {
         setParties(partiesResponse.data);
 
         // Fetch party details
-        const detailsResponse = await axios.get('http://localhost:4000/candidate/vote/count', {
+        const detailsResponse = await axios.get('https://voting-app-x15.vercel.app/candidate/vote/count', {
           headers: {
             'x-access-token': token
           }

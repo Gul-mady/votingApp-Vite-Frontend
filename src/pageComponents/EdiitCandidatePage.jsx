@@ -25,7 +25,7 @@ const EditCandidatePage = () => {
           return;
         }
 
-        const response = await axios.get(`http://localhost:4000/candidate/getCandidates`, {
+        const response = await axios.get(`https://voting-app-x15.vercel.app/candidate/getCandidates`, {
           headers: {
             'x-access-token': token
           }
@@ -65,7 +65,7 @@ const EditCandidatePage = () => {
         return;
       }
 
-      await axios.put(`http://localhost:4000/candidate/${candidateId}`, formData, {
+      await axios.put(`https://voting-app-x15.vercel.app/candidate/${candidateId}`, formData, {
         headers: {
           'x-access-token': token
         }

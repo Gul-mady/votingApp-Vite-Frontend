@@ -38,7 +38,7 @@ const QualifiedCandidatesPage = () => {
         }
 
         // Verify the token by fetching the user profile
-        const profileResponse = await fetch(`http://localhost:4000/user/profile/${userId}`, {
+        const profileResponse = await fetch(`https://voting-app-x15.vercel.app/user/profile/${userId}`, {
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${token}`
@@ -74,7 +74,7 @@ const QualifiedCandidatesPage = () => {
 
     const fetchCandidates = async (token) => {
       try {
-        const response = await axios.get('http://localhost:4000/candidate/getCandidates', {
+        const response = await axios.get('https://voting-app-x15.vercel.app/candidate/getCandidates', {
           headers: {
             'x-access-token': token
           }
@@ -92,7 +92,7 @@ const QualifiedCandidatesPage = () => {
   const handleDeleteCandidate = async (candidateID) => {
     const token = localStorage.getItem('jwtToken');
     try {
-      await axios.delete(`http://localhost:4000/candidate/${candidateID}`, {
+      await axios.delete(`https://voting-app-x15.vercel.app/candidate/${candidateID}`, {
         headers: {
           'x-access-token': token
         }

@@ -16,7 +16,7 @@ const LoginPage = () => {
     setError(''); // Reset error
 
     try {
-      const response = await axios.post('http://localhost:4000/user/login', {
+      const response = await axios.post('https://voting-app-x15.vercel.app/user/login', {
         identityCardNumber,
         password
       });
