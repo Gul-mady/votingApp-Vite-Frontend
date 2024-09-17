@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios'; // Import axios
-import {jwtDecode} from 'jwt-decode'; // Correct import for jwt-decode
+import { jwtDecode } from 'jwt-decode';
 
 const Dashboard = () => {
   const [isAdmin, setIsAdmin] = useState(false);
@@ -26,18 +25,25 @@ const Dashboard = () => {
           throw new Error('User ID is undefined');
         }
 
-        // Verify user role using axios
-        const response = await axios.get(`https://voting-app-x15.vercel.app/profile/${userId}`, {
+        // Verify user role
+        const response = await fetch(`https://voting-app-x15.vercel.app/user/profile/${userId}`, {
+          method: 'GET',
           headers: {
             'Authorization': `Bearer ${token}`
           }
         });
 
-        if (response.data.role === 'admin') {
+        if (!response.ok) {
+          throw new Error('Role verification failed');
+        }
+
+        const data = await response.json();
+
+        if (data.role === 'admin') {
           setIsAdmin(true);
           setAdminData({
-            name: response.data.name,
-            profilePicture: response.data.profilePicture // URL or relative path to profile picture
+            name: data.name,
+            profilePicture: data.profilePicture // URL or relative path to profile picture
           });
         } else {
           navigate('/403');
