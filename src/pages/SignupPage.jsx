@@ -64,7 +64,7 @@ const SignUpPage = () => {
                 type="file"
                 accept="image/*"
                 className="block w-full text-sm text-gray-500 file:py-2 file:px-4 file:rounded-lg file:bg-[#2e2e2e] file:text-white hover:file:bg-[#4a4a4a] transition"
-                onChange={(e) => setFile(e.target.files[0])}
+                // onChange={(e) => setFile(e.target.files[0])}
               />
               <span className="text-[#ffffff] text-sm mt-2">Add Profile Picture</span>
             </div>
