@@ -31,10 +31,7 @@ const SignUpPage = () => {
     }
 
     try {
-      await axios.request({
-        method: 'POST',
-        url: 'http://localhost:4000/user/signup',
-        data: formData,
+       await axios.post('http://localhost:4000/user/signup', formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
