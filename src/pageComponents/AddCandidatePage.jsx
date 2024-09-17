@@ -14,7 +14,7 @@ const AddCandidatePage = () => {
     const token = localStorage.getItem('jwtToken');
     
     try {
-      await axios.post('https://voting-app-x15.vercel.app/candidate/candidates', {
+      await axios.post('http://localhost:4000/candidate/candidates', {
         name,
         party,
         age

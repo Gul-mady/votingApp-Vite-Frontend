@@ -32,7 +32,7 @@ const ProfilePage = () => {
     const fetchProfileData = async () => {
       try {
         const decodedToken = jwtDecode(token);
-        const response = await axios.get(`https://voting-app-x15.vercel.app/user/profile/${decodedToken.id}`, {
+        const response = await axios.get(`http://localhost:4000/user/profile/${decodedToken.id}`, {
           headers: {
             'x-access-token': token,
           },
@@ -68,7 +68,7 @@ const ProfilePage = () => {
         {/* Profile Picture Section */}
         <div className="flex flex-col items-center mb-6">
           <img
-            src={profileData.profilePicture ? `https://voting-app-x15.vercel.app/uploads/${profileData.profilePicture}` : 'https://via.placeholder.com/150'}
+            src={profileData.profilePicture ? `http://localhost:4000/uploads/${profileData.profilePicture}` : 'https://via.placeholder.com/150'}
             alt="Profile"
             className="rounded-full w-32 h-32 object-cover border-4 border-[#73659e] transition-transform transform hover:scale-110 duration-500"
           />

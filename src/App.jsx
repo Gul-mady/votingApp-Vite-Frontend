@@ -29,8 +29,7 @@ function App() {
           <Route path="/candidates" element={<CandidatePage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<SignupPage />} />
-          <Route path="/editUser" element={<EditUser />} />
-          
+          <Route path="/editUser" element={<EditUser />} />     
           <Route path="/profile" element={<ProfilePage />} />
            <Route path="/dashboard" element={<Dashboard />} />
            <Route path="/403" element={<ForbiddenPage />} />
