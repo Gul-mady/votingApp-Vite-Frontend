@@ -7,6 +7,7 @@ const SignUpPage = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState(''); // New state for confirm password
   const [age, setAge] = useState('');
   const [mobile, setMobile] = useState('');
   const [address, setAddress] = useState('');
@@ -64,7 +65,7 @@ const SignUpPage = () => {
                 type="file"
                 accept="image/*"
                 className="block w-full text-sm text-gray-500 file:py-2 file:px-4 file:rounded-lg file:bg-[#2e2e2e] file:text-white hover:file:bg-[#4a4a4a] transition"
-                // onChange={(e) => setFile(e.target.files[0])}
+                onChange={(e) => setFile(e.target.files[0])} // Enable file input
               />
               <span className="text-[#ffffff] text-sm mt-2">Add Profile Picture</span>
             </div>
@@ -128,8 +129,8 @@ const SignUpPage = () => {
                 type="password"
                 placeholder="Re-enter Password"
                 className="p-2 text-lg border border-[#4a4a4a] rounded bg-[#2e2e2e] text-[#ffffff] focus:outline-none focus:ring-2 focus:ring-[#73659e] transition duration-300"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                value={confirmPassword} // Use confirmPassword state here
+                onChange={(e) => setConfirmPassword(e.target.value)} // Update confirmPassword state
                 required
               />
 
