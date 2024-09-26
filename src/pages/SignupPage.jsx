@@ -7,17 +7,25 @@ const SignUpPage = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState(''); // New state for confirm password
+  const [confirmPassword, setConfirmPassword] = useState(''); 
   const [age, setAge] = useState('');
   const [mobile, setMobile] = useState('');
   const [address, setAddress] = useState('');
   const [identityCardNumber, setIdentityCardNumber] = useState('');
   const [file, setFile] = useState(null);
-  const [role, setRole] = useState('voter'); // Default role is 'voter'
+  const [role, setRole] = useState('voter'); 
+  const [errorMessage, setErrorMessage] = useState(''); // State for error messages
   const navigate = useNavigate();
 
   const handleSignUp = async (e) => {
     e.preventDefault();
+    
+    // Check if passwords match
+    if (password !== confirmPassword) {
+      setErrorMessage('Passwords do not match.');
+      return;
+    }
+
     const formData = new FormData();
     formData.append('name', name);
     formData.append('email', email);
@@ -26,7 +34,7 @@ const SignUpPage = () => {
     formData.append('mobile', mobile);
     formData.append('address', address);
     formData.append('identityCardNumber', identityCardNumber);
-    formData.append('role', role); // Append role to FormData
+    formData.append('role', role);
     if (file) {
       formData.append('profilePicture', file);
     }
@@ -65,7 +73,7 @@ const SignUpPage = () => {
                 type="file"
                 accept="image/*"
                 className="block w-full text-sm text-gray-500 file:py-2 file:px-4 file:rounded-lg file:bg-[#2e2e2e] file:text-white hover:file:bg-[#4a4a4a] transition"
-                onChange={(e) => setFile(e.target.files[0])} // Enable file input
+                onChange={(e) => setFile(e.target.files[0])}
               />
               <span className="text-[#ffffff] text-sm mt-2">Add Profile Picture</span>
             </div>
@@ -129,10 +137,13 @@ const SignUpPage = () => {
                 type="password"
                 placeholder="Re-enter Password"
                 className="p-2 text-lg border border-[#4a4a4a] rounded bg-[#2e2e2e] text-[#ffffff] focus:outline-none focus:ring-2 focus:ring-[#73659e] transition duration-300"
-                value={confirmPassword} // Use confirmPassword state here
-                onChange={(e) => setConfirmPassword(e.target.value)} // Update confirmPassword state
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
                 required
               />
+
+              {/* Display error message if passwords do not match */}
+              {errorMessage && <p className="text-red-500 text-sm">{errorMessage}</p>}
 
               {/* Role Selection */}
               <div className="flex flex-col space-y-2 mt-4">
